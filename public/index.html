@@ -6,14 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-
   <title>PusherPoll</title>
+  <style>.hidden { display: none; }</style>
 </head>
 
 <body>
   <div class="container">
     <h1>OS Vote</h1>
     <p>Vote for your favorite OS to develop on</p>
+    <div id="hasVotedAlreadyErrorMsg" class="card-panel hidden" style="width: 30%">
+      <span class="red-text text-darken-2">You have already voted, you can only vote once.</span>
+    </div>
     <form id="vote-form">
       <p>
         <input type="radio" name="os" id="windows" value="Windows">

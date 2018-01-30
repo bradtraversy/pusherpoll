@@ -2,21 +2,29 @@ const form = document.getElementById('vote-form');
 
 // Form Submit Event
 form.addEventListener('submit', e => {
-  const choice = document.querySelector('input[name=os]:checked').value;
-  const data = { os: choice };
+  // check Local Storage to see if `hasVoted` key already stored
+  if(window.localStorage.getItem('hasVoted')) {
+    $('#hasVotedAlreadyErrorMsg').removeClass('hidden');
+    e.preventDefault();
+  } else {
+    // set Local Storage to show the user has voted already
+    window.localStorage.setItem('hasVoted', true)
 
-  fetch('http://localhost:3000/poll', {
-    method: 'post',
-    body: JSON.stringify(data),
-    headers: new Headers({
-      'Content-Type': 'application/json'
+    const choice = document.querySelector('input[name=os]:checked').value;
+    const data = { os: choice };
+
+    fetch('http://localhost:3000/poll', {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
     })
-  })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-
-  e.preventDefault();
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+      e.preventDefault();
+  }
 });
 
 fetch('http://localhost:3000/poll')
@@ -75,7 +83,7 @@ fetch('http://localhost:3000/poll')
       // Enable pusher logging - don't include this in production
       Pusher.logToConsole = true;
 
-      var pusher = new Pusher('0c6e1e724fc994c33998', {
+      var pusher = new Pusher('55a3916fa22efde02378', {
         cluster: 'us2',
         encrypted: true
       });
