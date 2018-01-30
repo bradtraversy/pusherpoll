@@ -24,6 +24,16 @@ fetch('http://localhost:3000/poll')
   .then(data => {
     const votes = data.votes;
     const totalVotes = votes.length;
+    document.querySelector('#chartTitle').textContent = `Total Votes: ${totalVotes}`;
+
+    // Refresh the Total Votes every 2 seconds
+    setInterval(() => {
+      fetch('http://localhost:3000/poll')
+        .then(res => res.json())
+        .then(data => document.querySelector('#chartTitle').textContent = `Total Votes: ${data.votes.length}`)
+        .catch(err => console.log(err));
+    }, 2000);
+
     // Count vote points - acc/current
     const voteCounts = votes.reduce(
       (acc, vote) => (
@@ -31,6 +41,14 @@ fetch('http://localhost:3000/poll')
       ),
       {}
     );
+
+    // Set initial Data Points
+    if (Object.keys(voteCounts).length === 0 && voteCounts.constructor === Object) {
+      voteCounts.Windows = 0;
+      voteCounts.MacOS = 0;
+      voteCounts.Linux = 0;
+      voteCounts.Other = 0;
+    }
 
     let dataPoints = [
       { label: 'Windows', y: voteCounts.Windows },
@@ -45,9 +63,6 @@ fetch('http://localhost:3000/poll')
       const chart = new CanvasJS.Chart('chartContainer', {
         animationEnabled: true,
         theme: 'theme1',
-        title: {
-          text: `Total Votes ${totalVotes}`
-        },
         data: [
           {
             type: 'column',
