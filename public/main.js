@@ -50,7 +50,7 @@ fetch("http://localhost:3000/poll")
 
             // Listen for the event.
             document.addEventListener('votesAdded', function (e) { 
-                titleText = e.detail;document.querySelector('#chartTitle').textContent = `Total Votes: ${e.detail.totalVotes}`;
+                document.querySelector('#chartTitle').textContent = `Total Votes: ${e.detail.totalVotes}`;
             });
             
             const chart = new CanvasJS.Chart('chartContainer', {
