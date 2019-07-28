@@ -19,20 +19,26 @@
     </div>
     <form id="vote-form">
       <p>
-        <input type="radio" name="os" id="windows" value="Windows">
-        <label for="windows">Windows</label>
+        <label>
+            <input type="radio" name="os" id="windows" value="Windows">
+            <span for="windows">Windows</span>
+        </label>
+      <p>
+        <label>
+            <input type="radio" name="os" id="macos" value="MacOS">
+            <span for="macos">MacOS</span>
+        </label>
+      <p>
+        <label>
+            <input type="radio" name="os" id="linux" value="Linux">
+            <span for="linux">Linux Distro</span>
+        </label>
       </p>
       <p>
-        <input type="radio" name="os" id="macos" value="MacOS">
-        <label for="macos">MacOS</label>
-      </p>
-      <p>
-        <input type="radio" name="os" id="linux" value="Linux">
-        <label for="linux">Linux Distro</label>
-      </p>
-      <p>
-        <input type="radio" name="os" id="other" value="Other">
-        <label for="other">Something Else</label>
+        <label>
+            <input type="radio" name="os" id="other" value="Other">
+            <span for="other">Something else</span>
+        </label>
       </p>
       <input type="submit" value="Vote" class="btn">
     </form>
